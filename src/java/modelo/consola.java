@@ -42,20 +42,21 @@ public class consola {
         JsonReader rdr = Json.createReader(is);
         JsonObject obj = rdr.readObject();
 
-
         int producto = obj.getJsonArray("serie").size();
-        
-        String [][] data2 = new String [producto][4];
+
+        String[][] data2 = new String[producto][4];
+        double[] arrayValores = new double[producto];
 
         for (int i = 0; i < obj.getJsonArray("serie").size(); i++) {
-            System.out.println("Entre al loop. Valor: "+ obj.getJsonArray("serie").getJsonObject(i).get("valor"));
+            System.out.println("Entre al loop. Valor: " + obj.getJsonArray("serie").getJsonObject(i).get("valor"));
             double variacion;
 
-            data2[i][0] =  (""+(i + 1));
+            data2[i][0] = ("" + (i + 1));
             data2[i][1] = (obj.getJsonArray("serie").getJsonObject(i).get("valor")).toString();
+            arrayValores[i] = Double.parseDouble((obj.getJsonArray("serie").getJsonObject(i).get("valor")).toString());
             if (i >= 1) {
-                variacion = Double.parseDouble((obj.getJsonArray("serie").getJsonObject(i).get("valor")).toString())- Double.parseDouble((obj.getJsonArray("serie").getJsonObject(i-1).get("valor")).toString());
-                data2[i][2] = (""+variacion);
+                variacion = Double.parseDouble((obj.getJsonArray("serie").getJsonObject(i).get("valor")).toString()) - Double.parseDouble((obj.getJsonArray("serie").getJsonObject(i - 1).get("valor")).toString());
+                data2[i][2] = ("" + variacion);
             } else {
                 data2[i][2] = "N/A";
             }
@@ -64,6 +65,26 @@ public class consola {
         tablemodel.setDataVector(data2, columNames);
 
         return tablemodel;
+    }
+
+    public String encontrarMayor(String indicador) throws MalformedURLException, IOException {
+        System.out.print("Indicador: " + indicador);
+
+        URL url = new URL("http://mindicador.cl/api/" + indicador);
+
+        InputStream is = url.openStream();
+        JsonReader rdr = Json.createReader(is);
+        JsonObject obj = rdr.readObject();
+
+        int producto = obj.getJsonArray("serie").size();
+        double variacion;
+
+        double[] arrayValores = new double[producto];
+        for (int i = 1; i < obj.getJsonArray("serie").size(); i++) {
+       
+        }
+        String aretornar = ("");
+        return aretornar;
     }
 
 }

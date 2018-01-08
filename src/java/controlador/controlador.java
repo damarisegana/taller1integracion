@@ -55,6 +55,11 @@ public class controlador implements ActionListener, MouseListener {
                 } catch (IOException ex) {
                     Logger.getLogger(controlador.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            try {
+                this.vistaMostrar.mayorVariacion.setText(this.modelo.encontrarMayor(this.vistaMostrar.boxIndicador.getSelectedItem().toString()));
+            } catch (IOException ex) {
+                Logger.getLogger(controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
             break;
 
